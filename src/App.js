@@ -44,7 +44,7 @@ class App extends React.Component {
     
    this.timeoutUpdate = setTimeout(() => {
       this.setState({ posts, counter: counter + 1 })
-    }, 3000);
+    }, 1000);
   }
    
 
