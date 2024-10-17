@@ -3,7 +3,6 @@ import React from 'react';
 
 class App extends React.Component {
   state = {
-    counter: 0,
     posts: [
       {
         id: 1,
@@ -22,48 +21,59 @@ class App extends React.Component {
       }
     ]
   };
-  
-  timeoutUpdate = null; 
 
-  componentDidMount() {
-    this.handleTimeOut();
-  }
+  // timeoutUpdate = null; 
 
-  componentDidUpdate() {
-    this.handleTimeOut();
-  }
+  // componentDidMount() {
+  //   this.handleTimeOut();
+  // }
 
-  componentWillUnmount() {
-    clearTimeout(this.timeoutUpdate);
-  }
+  // componentDidUpdate() {
+  //   this.handleTimeOut();
+  // }
 
-  handleTimeOut = () => {
-    const { posts, counter } = this.state;
-    posts[0].title = 'O titulo mudou';
+  // componentWillUnmount() {
+  //   clearTimeout(this.timeoutUpdate);
+  // }
 
-    
-   this.timeoutUpdate = setTimeout(() => {
-      this.setState({ posts, counter: counter + 1 })
-    }, 1000);
-  }
-   
+  // handleTimeOut = () => {
+  //   const { posts, counter } = this.state;
+  //   posts[0].title = 'O titulo mudou';
+
+
+  //  this.timeoutUpdate = setTimeout(() => {
+  //     this.setState({ posts, counter: counter + 1 })
+  //   }, 1000);
+  // }
+
 
   render() {
-    const { posts, counter } = this.state;
- 
+    const { posts } = this.state;
 
-    
     return (
       <div className="App">
-        <h1>{counter}</h1>
         {posts.map(post => (
           <div key={post.id}>
-            <h1>{post.title}</h1>
-            <p>{post.body}</p>
+            <h1> {post.title} </h1>
+            <p> {post.body} </p>
+
           </div>
-          ))}
+        ))}
       </div>
-    );
+    )
+
+
+    // return (
+    //   <div className="App">
+    //     <h1>{counter}</h1>
+    //     {posts.map(post => (
+    //       <div key={post.id}>
+    //         <h1>{post.title}</h1>
+    //         <p>{post.body}</p>
+    //       </div>
+    //       ))}
+    //   </div>
+    // );
   }
 }
 
