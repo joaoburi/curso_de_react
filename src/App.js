@@ -22,58 +22,46 @@ class App extends React.Component {
     ]
   };
 
-  // timeoutUpdate = null; 
 
-  // componentDidMount() {
-  //   this.handleTimeOut();
-  // }
+  // montar componente
+  componentDidMount() {
+    this.loadPosts();
+  }
 
-  // componentDidUpdate() {
-  //   this.handleTimeOut();
-  // }
+  loadPosts = async () => {
+    const postResponse = fetch('https://jsonplaceholder.typicode.com/posts');
+    const photosResponse = fetch('https://jsonplaceholder.typicode.com/photos');
 
-  // componentWillUnmount() {
-  //   clearTimeout(this.timeoutUpdate);
-  // }
+    const [posts, photos] = await Promise.all([postResponse, photosResponse]);
 
-  // handleTimeOut = () => {
-  //   const { posts, counter } = this.state;
-  //   posts[0].title = 'O titulo mudou';
+    const postsJson = await posts.json();
+    const photosJson = await photos.json();
 
+    const postsAndPhotos = postsJson.map((post, index) => {
+      return { ...post, cover: photosJson[index].url }
+    });
 
-  //  this.timeoutUpdate = setTimeout(() => {
-  //     this.setState({ posts, counter: counter + 1 })
-  //   }, 1000);
-  // }
+    this.setState({ posts: postsJson });
+  }
 
 
   render() {
     const { posts } = this.state;
 
     return (
-      <div className="App">
-        {posts.map(post => (
-          <div key={post.id}>
-            <h1> {post.title} </h1>
-            <p> {post.body} </p>
-
-          </div>
-        ))}
-      </div>
+      <section className="container">
+        <div className="posts">
+          {posts.map(post => (
+            <div className="post">
+              <div key={post.id} className="post-content">
+                <h1> {post.title} </h1>
+                <p> {post.body} </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     )
-
-
-    // return (
-    //   <div className="App">
-    //     <h1>{counter}</h1>
-    //     {posts.map(post => (
-    //       <div key={post.id}>
-    //         <h1>{post.title}</h1>
-    //         <p>{post.body}</p>
-    //       </div>
-    //       ))}
-    //   </div>
-    // );
   }
 }
 
