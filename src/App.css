@@ -1,5 +1,9 @@
 .container {
   background: #eee;
+  max-width: 1200px;
+  min-height: 100vh;
+  padding: 30px;
+  margin: 0 auto;
 }
 
 .posts {
@@ -11,6 +15,15 @@
 .post {
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
+  transition: transform 100ms ease-in-out;
+}
+
+.post:hover {
+  transform: scale(1.05);
+}
+
+.post img {
+  max-width: 100%;
 }
 
 .post-content {

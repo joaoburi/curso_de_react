@@ -3,23 +3,7 @@ import React from 'react';
 
 class App extends React.Component {
   state = {
-    posts: [
-      {
-        id: 1,
-        title: 'O título 1',
-        body: 'O corpo 1'
-      },
-      {
-        id: 2,
-        title: 'O título 2',
-        body: 'O corpo 2'
-      },
-      {
-        id: 3,
-        title: 'O título 3',
-        body: 'O corpo 3'
-      }
-    ]
+    posts: []
   };
 
 
@@ -40,8 +24,9 @@ class App extends React.Component {
     const postsAndPhotos = postsJson.map((post, index) => {
       return { ...post, cover: photosJson[index].url }
     });
+    
 
-    this.setState({ posts: postsJson });
+    this.setState({ posts: postsAndPhotos });
   }
 
 
@@ -51,8 +36,9 @@ class App extends React.Component {
     return (
       <section className="container">
         <div className="posts">
-          {posts.map(post => (
+          {posts.map(post => ( 
             <div className="post">
+              <img src={post.cover} alt={post.title}/>
               <div key={post.id} className="post-content">
                 <h1> {post.title} </h1>
                 <p> {post.body} </p>
